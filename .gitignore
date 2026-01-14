@@ -1,0 +1,7 @@
+# wezterm-config
+# -------------------------------------------------
+# This repository contains only declarative config.
+# No generated files are expected.
+# -------------------------------------------------
+
+.DS_Store

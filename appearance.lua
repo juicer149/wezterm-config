@@ -29,7 +29,7 @@ function M.apply(config)
   -- ----------------------------------------------------------
 
   -- Use theme background directly; avoid transparency tricks
-  config.window_background_opacity = 0.99
+  config.window_background_opacity = 0.95
 
   -- Explicit terminal identity (truecolor, modern capabilities)
   config.term = "wezterm"

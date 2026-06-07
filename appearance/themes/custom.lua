@@ -87,6 +87,7 @@ M.schemes = {
 M.themes = {
   sepia = {
     scheme = "Sepia Forge",
+    bat_theme = "ansi",
     cursor = {
       bg = "#B97C46",
       fg = "#F4EAC8",
@@ -99,6 +100,7 @@ M.themes = {
 
   sepia_dim = {
     scheme = "Sepia Forge Dim",
+    bat_theme = "ansi",
     cursor = {
       bg = "#B97C46",
       fg = "#EAD9AD",

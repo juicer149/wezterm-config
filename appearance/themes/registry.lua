@@ -45,6 +45,13 @@ function M.apply(config, theme_name)
     selection_bg = theme.selection.bg,
     selection_fg = theme.selection.fg,
   }
+
+  config.set_environment_variables = config.set_environment_variables or {}
+
+  config.set_environment_variables.BAT_THEME = theme.bat_theme or "ansi"
+
+  config.set_environment_variables.WSLENV =
+    "TERM:COLORTERM:TERM_PROGRAM:TERM_PROGRAM_VERSION:BAT_THEME"
 end
 
 return M

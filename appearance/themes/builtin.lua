@@ -3,7 +3,7 @@
 -- Built-in color scheme presets.
 --
 -- This file owns references to WezTerm built-in schemes
--- plus local cursor/selection overrides.
+-- plus local cursor/selection and tool theme overrides.
 -- Theme selection belongs in appearance/config.lua.
 -- ------------------------------------------------------------
 
@@ -12,6 +12,7 @@ local M = {}
 M.themes = {
   light = {
     scheme = "Builtin Solarized Light",
+    bat_theme = "Solarized (light)",
     cursor = {
       bg = "#c0c0c0",
       fg = "#000000",
@@ -24,6 +25,7 @@ M.themes = {
 
   dark = {
     scheme = "Builtin Solarized Dark",
+    bat_theme = "Solarized (dark)",
     cursor = {
       bg = "#c0c0c0",
       fg = "#000000",
@@ -36,6 +38,7 @@ M.themes = {
 
   belafonte = {
     scheme = "Belafonte Night",
+    bat_theme = "ansi",
     cursor = {
       bg = "#c0c0c0",
       fg = "#000000",
@@ -48,6 +51,7 @@ M.themes = {
 
   birds = {
     scheme = "BirdsOfParadise",
+    bat_theme = "ansi",
     cursor = {
       bg = "#c0c0c0",
       fg = "#000000",
@@ -60,6 +64,7 @@ M.themes = {
 
   ciapre = {
     scheme = "Ciapre",
+    bat_theme = "ansi",
     cursor = {
       bg = "#c0c0c0",
       fg = "#000000",

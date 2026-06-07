@@ -1,132 +1,173 @@
-# wezterm-config
+# wezterm
 
-A minimal, modular WezTerm configuration designed for long-term use
-in a tmux-centric development environment.
+Minimal, modular WezTerm configuration.
 
-This repository treats the terminal emulator as a **rendering layer**,
-not a workflow manager.
+WezTerm is treated as a rendering layer:
 
----
-
-## Design philosophy
-
-This configuration follows the same principles as the rest of my
-development environment:
-
-- **Explicit ownership**
-- **One concern per file**
-- **No hidden behavior**
-- **No dynamic configuration**
-- **Predictable over time**
-
-WezTerm is responsible only for:
-
-- window geometry
-- text rendering
-- font metrics
-- terminal-level behavior
-
-Everything else belongs elsewhere.
-
----
-
-## Architectural position
-
-```
-
-Operating system / DPI
+```text
+OS / DPI
 ↓
-WezTerm        ←── this repository
+WezTerm
 ↓
 tmux
 ↓
-Shell (bash)
+shell
 ↓
-Editor (Neovim)
-
+editor
 ```
 
-WezTerm does **not**:
-- manage tabs or multiplexing
-- define workflow keybindings
-- integrate with editors
-- guess user intent
+WezTerm owns rendering. Workflow belongs to tmux, the shell, and the editor.
 
 ---
 
-## File layout
+## Structure
 
-```
-
-wezterm-config/
-├── wezterm.lua     # entry point / composition
-├── appearance.lua  # window behavior & rendering policy
-├── fonts.lua       # typography & text metrics
-├── keys.lua        # terminal-level keybindings (currently empty)
-├── .gitignore
+```text
+wezterm/
+├── wezterm.lua
+├── appearance/
+│   ├── init.lua
+│   ├── config.lua
+│   └── themes/
+│       ├── registry.lua
+│       ├── builtin.lua
+│       └── custom.lua
+├── fonts.lua
+├── keys.lua
 └── README.md
-
 ```
+
+---
+
+## Modules
 
 ### `wezterm.lua`
-Composition only.  
-No behavior, no policy.
 
-### `appearance.lua`
-Owns:
-- initial window size (grid-based)
-- cursor behavior
-- scrollback
-- rendering discipline
-- tab bar policy
+Entry point. Composition only.
+
+```lua
+local config = {}
+
+local appearance = require "appearance.init"
+local fonts      = require "fonts"
+local keys       = require "keys"
+
+appearance.apply(config)
+fonts.apply(config)
+keys.apply(config)
+
+return config
+```
+
+### `appearance/`
+
+Owns rendering policy and color themes.
+
+```text
+appearance/init.lua             public appearance API
+appearance/config.lua           selected theme + rendering policy
+appearance/themes/registry.lua  collects and applies themes
+appearance/themes/builtin.lua   aliases for built-in WezTerm themes
+appearance/themes/custom.lua    user-defined color schemes
+```
+
+Theme selection lives in:
+
+```lua
+-- appearance/config.lua
+M.theme = "sepia_dim"
+```
+
+Available themes:
+
+```text
+light
+dark
+belafonte
+birds
+ciapre
+sepia
+sepia_dim
+```
 
 ### `fonts.lua`
-Owns:
-- font family & fallback
-- baseline font size
-- line height
-- glyph behavior
 
-Font zoom is treated as **runtime state**, not configuration.
+Owns typography:
+
+```text
+font family
+font size
+line height
+glyph rendering
+```
 
 ### `keys.lua`
-Intentionally minimal.
-Keybindings are added **only when real friction appears**.
+
+Owns terminal-level keybindings.
+
+It is intentionally minimal. Keybindings should live here only when they cannot be handled better by tmux, the shell, or the editor.
 
 ---
 
 ## Usage
 
-This repository is intended to be the **single source of truth**
-for WezTerm configuration.
-
-On systems where WezTerm runs natively:
+Symlink this directory into WezTerm’s config path:
 
 ```bash
-ln -s ~/path/to/wezterm-config ~/.config/wezterm
+ln -s ~/dev/env/terminal/wezterm ~/.config/wezterm
 ```
 
-On Windows + WSL setups, the Windows-side `wezterm.lua` may
-delegate to this repository via `dofile`.
+Reload:
+
+```bash
+wezterm cli reload-configuration
+```
+
+or restart WezTerm.
 
 ---
 
-## Non-goals
+## `bat`
 
-This configuration intentionally avoids:
+Recommended `bat` config:
 
-* themes
-* plugin systems
-* per-host conditionals
-* dynamic behavior
-* UI decoration
+```text
+--theme="ansi"
+--style="numbers,changes"
+```
 
-If complexity increases, it should move **down** (shell/editor)
-or **up** (OS/terminal), not into this repo.
+Put it in:
+
+```bash
+~/.config/bat/config
+```
+
+This makes `bat` follow the WezTerm ANSI palette instead of applying an unrelated syntax theme.
 
 ---
 
-## Status
+## Principles
 
-Stable core.
-Expected to evolve slowly and deliberately.
+```text
+wezterm.lua      composition
+appearance/      rendering + colors
+fonts.lua        typography
+keys.lua         terminal keybindings
+```
+
+Keep WezTerm quiet and predictable.
+
+No runtime theme switching.
+No workflow management.
+No tab/pane logic.
+No project-specific behavior.
+
+If complexity grows, move it to the layer that owns it:
+
+```text
+tmux      sessions, panes, multiplexing
+shell     commands, aliases, environment
+editor    editing, navigation, LSP
+project   project-specific scripts
+WezTerm   rendering
+```

@@ -21,6 +21,7 @@ local M = {}
 --   "ciapre"     -- mörk aubergine/lila
 --   "sepia"      -- ljus sepia / parchment
 --   "sepia_dim"  -- dämpad sepia, bättre terminal-läge
+--   "sepia_dark" -- mörk sepia, bättre terminal-läge
 
 M.theme = "sepia_dim"
 

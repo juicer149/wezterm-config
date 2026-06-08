@@ -12,6 +12,7 @@ local M = {}
 M.themes = {
   light = {
     scheme = "Builtin Solarized Light",
+    kind = "light",
     bat_theme = "Solarized (light)",
     cursor = {
       bg = "#c0c0c0",
@@ -25,6 +26,7 @@ M.themes = {
 
   dark = {
     scheme = "Builtin Solarized Dark",
+    kind = "dark",
     bat_theme = "Solarized (dark)",
     cursor = {
       bg = "#c0c0c0",
@@ -38,6 +40,7 @@ M.themes = {
 
   belafonte = {
     scheme = "Belafonte Night",
+    kind = "dark",
     bat_theme = "ansi",
     cursor = {
       bg = "#c0c0c0",
@@ -51,6 +54,7 @@ M.themes = {
 
   birds = {
     scheme = "BirdsOfParadise",
+    kind = "dark",
     bat_theme = "ansi",
     cursor = {
       bg = "#c0c0c0",
@@ -64,6 +68,7 @@ M.themes = {
 
   ciapre = {
     scheme = "Ciapre",
+    kind = "dark",
     bat_theme = "ansi",
     cursor = {
       bg = "#c0c0c0",

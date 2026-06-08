@@ -49,9 +49,11 @@ function M.apply(config, theme_name)
   config.set_environment_variables = config.set_environment_variables or {}
 
   config.set_environment_variables.BAT_THEME = theme.bat_theme or "ansi"
+  config.set_environment_variables.TERMINAL_THEME = theme_name
+  config.set_environment_variables.TERMINAL_THEME_KIND = theme.kind or "dark"
 
   config.set_environment_variables.WSLENV =
-    "TERM:COLORTERM:TERM_PROGRAM:TERM_PROGRAM_VERSION:BAT_THEME"
+    "TERM:COLORTERM:TERM_PROGRAM:TERM_PROGRAM_VERSION:BAT_THEME:TERMINAL_THEME:TERMINAL_THEME_KIND"
 end
 
 return M

@@ -93,7 +93,7 @@ M.schemes = {
       "#4A5A67", -- blue: types / blue-gray classification
       "#6F4A64", -- magenta: subdued aubergine
       "#5A4B2B", -- cyan slot: strings / warm olive-sepia
-      "#E7D1B3", -- white: paper background
+      "#6B5640", -- white: paper background
     },
 
     brights = {
@@ -104,7 +104,7 @@ M.schemes = {
       "#5D6A76", -- bright blue: stronger blue-gray
       "#805A75", -- bright magenta: muted purple
       "#7A4E24", -- bright cyan slot: constants / warm brass fallback
-      "#F2DEC2", -- bright white: soft paper highlight
+      "#3A2A1D", -- bright white: strong readable ui text
     },
   },
 
